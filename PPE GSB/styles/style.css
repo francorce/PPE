@@ -1,0 +1,196 @@
+body{
+    background-image: url("../images/labor.jpg");
+	background-size: cover;
+}
+
+
+form#paiement {
+  opacity: 0.80;
+  background: #C4BEBE;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  border-color:black;
+  padding: 20px;
+  width: 400px;
+}
+
+form#paiement fieldset {
+  border: none;
+  margin-bottom: 10px;
+}
+form#paiement fieldset:last-of-type {
+  margin-bottom: 0;
+}
+
+form#paiement legend {
+	background: #C4BEBE;
+  color: black;
+  text-align:center;
+  font-size: 16px;
+  font-weight: bold;
+  
+  text-shadow: 0 1px 1px #C4BEBE;
+}
+
+
+
+form#paiement fieldset fieldset legend {
+  color: #000000;
+  font-size: 13px;
+  font-weight: normal;
+  padding-bottom: 0;
+}
+
+form#paiement ol li {
+  background: #000000;
+  background: rgba(255,255,255,.3);
+ border-color:black;
+  border-style: solid;
+  border-width: 2px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  line-height: 30px;
+  list-style: none;
+  padding: 5px 10px;
+  margin-bottom: 2px;
+}
+form#paiement ol ol li {
+  background: none;
+  border: none;
+  float: left;
+}
+
+form#paiement label {
+  float: left;
+  font-size: 13px;
+  width: 110px;
+}
+form#paiement fieldset fieldset label {
+  background:none no-repeat left 50%;
+  line-height: 20px;
+  padding: 0 0 0 30px;
+  width: auto;
+}
+
+form#paiement fieldset fieldset label:hover {
+  cursor: pointer;
+}
+
+form#paiement input:not([type=radio]),
+form#paiement textarea {
+  background: white;
+  border: none;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  font: italic 13px Georgia, "Times New Roman", Times, serif;
+  outline: none;
+  padding: 5px;
+  width: 200px;
+}
+
+form#paiement input[type=radio] {
+  float: left;
+  margin-right: 5px;
+}
+
+form#paiement button {
+  background: #000000;
+  border: none;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -khtml-border-radius: 20px;
+  border-radius: 20px;
+  color: #ffffff;
+  display: block;
+  font: 18px Georgia, "Times New Roman", Times, serif;
+  letter-spacing: 1px;
+  margin: auto;
+  padding: 7px 25px;
+  text-shadow: 0 1px 1px #000000;
+  text-transform: uppercase;
+  
+}
+form#paiement button:hover {
+  background: #1e2506;
+  cursor: pointer;
+}
+table
+{
+    border-collapse: collapse;
+}
+td, th
+{
+    border: 1px solid black;
+}
+
+h1{
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+h2{
+	margin-top:40px;
+}
+
+label{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+#container{
+    width:400px;
+    margin:0 auto;
+   
+}
+/* Bordered form */
+form {
+  opacity: 0.80;
+    width:100%;
+    padding: 30px;
+	margin: -30px;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+#container h1{
+    width: 38%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+input[type=submit] {
+	font-family: "Arial Black", Gadget, sans-serif;
+    background-color: #53af57;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+input[type=submit]:hover {
+    background-color: white;
+    color: black;
+    border: 0px solid #53af57;
+}

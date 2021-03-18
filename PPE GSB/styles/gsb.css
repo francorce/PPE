@@ -1,0 +1,77 @@
+body {
+    text-align: justify;
+	background-image: url('../img/foret.jpg');
+	background-size: cover;
+}
+
+footer a,
+footer h1,
+footer h2,
+footer h3,
+footer h4,
+footer h5,
+footer h6 {
+    color: #bfbfbf;
+}
+
+footer a:hover {
+    color: #20b2aa;
+}
+
+footer ul,
+footer p {
+    font-size: 0.75em;
+}
+
+.header,
+#fondNav,
+footer {
+    width: 100%;
+}
+
+footer {
+    color: #fff;
+}
+
+#contenu {
+    min-height: 500px;
+}
+
+#fondNav,
+footer {
+
+    background-color: #111;
+}
+
+.header {
+	background-size: cover;
+	padding-top: 5px;
+	padding-bottom: 5px;
+    background-image: url('../img/beige.png');
+}
+
+.header h2 {
+	font-family: bookman old style;
+    color: black;
+	bottom: 50px;
+}
+
+.header h4 {
+	left:100px;
+}
+
+h6 {
+	font-family: bookman old style;
+}
+
+h4 {
+	font-family: arial black;
+}
+
+div {
+	right:0px;
+}
+
+img {
+	right:-100px;
+}

@@ -1,0 +1,114 @@
+body {
+	max-width: 1000px;
+	margin: auto;
+	font-family: sans-serif;
+}
+ul{
+	padding:0;
+	list-style:none;
+}
+a{
+	text-decoration:none;
+}
+header{
+	display:grid;
+	grid-template-columns: 50% 50%;
+	height:50px;
+}
+.logo img{
+	position:relative;
+	left: 1em;
+	top: 1em;
+}
+.menu ul{
+	display:grid;
+	text-align:center;
+	margin:0;
+}
+.menu a{
+	line-height:50px;
+	color:black;
+}
+.bouton-menu{
+	background-color: #F9F9F9;
+	grid-column:1;
+}
+.bouton-dkk{
+	background-color: #F4F4F4;
+	grid-column:2;
+}
+.bouton-panier{
+	background-color: #EDEDED;
+	grid-column:3;
+}
+h2{
+	text-indent:20px; 
+}
+.produits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+ 
+  grid-auto-rows: minmax(100px, auto);
+  text-align: justify-content;
+  list-style-type:none;	
+  color: white;
+}
+.premier {
+ background-color: #DBEAD8;
+}
+.deuxieme {	 
+background-color: #C2D4D8;
+}
+.troisieme {
+background-color: #B0ABC3;
+}
+.quatrieme {
+background-color: #DBEAD8;
+}
+.cinquieme {
+ background-color: #C2D4D8;
+}
+.sixieme {
+background-color: #B0ABC3;
+}
+
+.pied{
+	font-size: small;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	
+}
+.infos {
+text-align: center;
+padding: 20px 0;
+}
+.infos li{
+	margin: 0 1em;
+	display: inline-block;
+}
+.infos a{
+	color: black;
+	text-decoration: none;
+}
+.paiement{
+	text-align: right;
+	padding: 20px 0;
+}
+.paiement h3{
+display: inline-block;
+	margin: 0 1em;
+	font-weight: inherit;
+	font-size: inherit;
+}
+.paiement ul{
+	display: inline-block;
+	margin: 0 1em;
+}
+.paiement li{
+	color: white;
+	background-color: black;
+	border-radius: .5em;
+	font-size: .9em;
+	padding: .2em;
+	display: inline-block;
+}

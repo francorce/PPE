@@ -1,0 +1,90 @@
+body{
+    background-image: url("../images/labor.jpg");
+	background-size: cover;
+}
+
+h1{
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+label{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+img{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	margin-top:auto;
+}
+
+#container{
+    width:1000px;
+    margin:0 auto;
+    margin-top:10%;
+}
+select {
+    width: 100%;
+    padding: 18px 22px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color:#53AF57 ;  
+}
+/* Bordered form */
+form {
+    width:100%;
+    padding: auto;
+    border: 0px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+#container h1{
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password], input[type=number] {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+input[type=submit] {
+	font-family: "Arial Black", Gadget, sans-serif;
+    background-color: #53af57;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    border: 1px solid white;
+}
+input[type=submit]:hover {
+    background-color: white;
+    color: #53af57;
+    border: 1px solid #53af57;
+}
+.tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;}
+.tg td{border-color:black;border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;margin: auto 0px;}}
+table, th, td {
+    border: 0px solid black;
+  }
+  table {
+    border-collapse: collapse;
+    border: 0px solid #f1f1f1;
+    background: #fff;
+  }

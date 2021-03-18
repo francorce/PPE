@@ -1,0 +1,1509 @@
+package ppe;
+
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+import javax.imageio.*;
+import java.sql.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.table.DefaultTableModel;
+
+public class Accueil extends JFrame {
+	private static JTable table;
+	public Accueil() {
+		
+		JLayeredPane layeredPane = new JLayeredPane();
+		getContentPane().add(layeredPane, BorderLayout.CENTER);
+		
+	}
+
+ public static void main(String[] args) {
+
+
+ EventQueue.invokeLater(new Runnable() {
+
+	 
+	 
+	 
+	int nombreEquipe = 0; 
+	int nombrePersonne = 0 ;
+	  
+	  
+   public void run() {
+ 
+	   String url = "jdbc:mysql://localhost:3306/m2l";
+	    String user = "root";
+	    String passwd = "";
+    
+    JFrame fenetre = new JFrame("Accueil");
+
+String[] Don = null;
+String[][] Dat = null;
+    try 
+    {
+    	Class.forName("com.mysql.jdbc.Driver");
+    	String url2 = "jdbc:mysql://localhost:3306/m2l";
+    String user2 = "root";
+    String passwd2 = "";
+        Connection con = DriverManager.getConnection(url2, user2, passwd2);
+      
+        String query = "SELECT * FROM candidat";
+      
+        Statement stm = con.createStatement();
+        ResultSet res = stm.executeQuery(query);
+      
+        String columns[] = { "Nom","Prenom","Ville","Telephone" };
+        String data[][] = new String[8][4];
+      
+        int i = 0;
+        while (res.next()) {
+          String nom = res.getString("Nom_Candidat");
+          String prenom = res.getString("Prenom_Candidat");
+          String ville = res.getString("Ville_Candidat");
+          String tel = res.getString("Telephone_Candidat");
+          data[i][0] = nom + "";
+          data[i][1] = prenom;
+          data[i][2] = ville;
+          data[i][3] = tel;
+          i++;
+          Don = columns;
+          Dat = data;
+        }
+
+      } catch(SQLException e) {
+        
+      } catch (ClassNotFoundException e1) {
+		
+	}
+    
+    JTable TableauxPersonnes = new JTable(Dat, Don);
+	fenetre.setBounds(0,0, 700, 200);
+	fenetre.getContentPane().add(TableauxPersonnes);
+    fenetre.setVisible(true);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //ACCUEIL
+    JLabel Fond = new JLabel("");
+    Image img = new ImageIcon(this.getClass().getResource("test/rock.jpg")).getImage();
+	Fond.setBounds(0,0,800,600);
+
+	JLabel Texte_Accueil = new JLabel("Application Gestion M2L");
+	Font x = new Font("Arial", Font.BOLD, 32);
+	Texte_Accueil.setFont(x);
+	Texte_Accueil.setBounds(215, 50, 1000, 40);
+	fenetre.getContentPane().setLayout(new FlowLayout());
+
+	
+    JButton BoutonComp_Accueil = new JButton("Compétitions");
+    BoutonComp_Accueil.setBounds(100, 300, 150, 100);
+    
+
+    JButton BoutonEquipe_Accueil = new JButton("Equipe");
+    BoutonEquipe_Accueil.setBounds(317, 300, 150, 100);
+
+    JButton BoutonPersonne_Accueil = new JButton("Personnes");
+    BoutonPersonne_Accueil.setBounds(535, 300, 150, 100);
+
+   
+
+
+    //COMPETITION
+
+    JLabel Texte_Comp = new JLabel(" MENU COMPETITIONS");
+    Texte_Comp.setFont(x);
+    Texte_Comp.setBounds(240,100,1000,40);
+    fenetre.setLayout(new FlowLayout());
+    
+    Font y = new Font("Arial",Font.BOLD,15);
+    JLabel Texte_NomComp = new JLabel("Nom compétition");
+    Texte_NomComp.setFont(y);
+    Texte_NomComp.setBounds(150,120,300,120);
+    fenetre.setLayout(new FlowLayout());
+    
+    JLabel Texte_DateComp = new JLabel("Date de la compétition");
+    Texte_DateComp.setFont(y);
+    Texte_DateComp.setBounds(150,220,300,120);
+    fenetre.setLayout(new FlowLayout());
+    
+    JTextField ZoneTexte_NomCompetition_AjoutComp=new JTextField();
+    ZoneTexte_NomCompetition_AjoutComp.setBounds(150, 200, 200, 25); 
+    
+    JTextField ZoneTexte_DateComp =new JTextField();
+    ZoneTexte_DateComp.setBounds(150, 300, 200, 25);
+    
+    JLabel Texte_AjoutComp = new JLabel("Ajout compétition");
+    Texte_AjoutComp.setFont(x);
+    Texte_AjoutComp.setBounds(280,50,1000,40);
+    fenetre.setLayout(new FlowLayout());
+    
+    JButton BoutonAjout_Comp = new JButton("Ajouter une compétition");
+    BoutonAjout_Comp.setBounds(130, 300, 200, 100);
+
+    JButton BoutonGestion_Comp = new JButton("Gérer les compétitions");
+    BoutonGestion_Comp.setBounds(450, 300, 200, 100);
+    
+    JButton BoutonRetour_Comp = new JButton("Retour");
+    BoutonRetour_Comp.setBounds(600, 450, 100, 50);
+
+    JButton BoutonValider_AjoutComp = new JButton("Valider");
+    BoutonValider_AjoutComp.setBounds(100, 450, 250,70);
+    
+    JLabel Texte_GererComp = new JLabel ("Gérer les compétitions");
+    Texte_GererComp.setFont(x);
+    Texte_GererComp.setBounds(280,50,1000,40);
+    fenetre.setLayout(new FlowLayout());
+    
+    JButton BoutonSolo_AjoutComp = new JButton ("Compétition en solo");
+    BoutonSolo_AjoutComp.setBounds(130, 300, 200, 100);
+    
+    JButton BoutonEquipe_AjoutComp = new JButton("Compétition en équipe");
+    BoutonEquipe_AjoutComp.setBounds(450, 300, 200, 100);
+    
+    JLabel Texte_TypeComp = new JLabel("Type de compétition");
+    Texte_TypeComp.setFont(x);
+    Texte_TypeComp.setBounds(250,50,1000,40);
+    fenetre.setLayout(new FlowLayout());
+    
+    JButton BoutonRetour_AjoutComp = new JButton("Retour");
+    BoutonRetour_AjoutComp.setBounds(600, 450, 100, 50);
+    
+    JLabel Texte_AjoutSoloComp = new JLabel("Ajouter une compétition en solo");
+    Texte_AjoutSoloComp.setFont(x);
+    Texte_AjoutSoloComp.setBounds(180,50,1000,40);
+    fenetre.setLayout(new FlowLayout());
+    
+    JLabel Texte_NomCompSolo = new JLabel("Nom compétition");	
+    Texte_NomCompSolo.setFont(y);
+    Texte_NomCompSolo.setBounds(100,125,300,120);
+    fenetre.setLayout(new FlowLayout());
+    
+    JTextField ZoneTexte_NomCompSolo =new JTextField();
+    ZoneTexte_NomCompSolo.setBounds(100, 200, 150, 25);
+    
+    JLabel Texte_DateCompSolo = new JLabel("Date compétition");	
+    Texte_DateCompSolo.setFont(y);
+    Texte_DateCompSolo.setBounds(100,225,300,120);
+    fenetre.setLayout(new FlowLayout());
+    
+    JTextField ZoneTexte_DateCompSolo =new JTextField();
+    ZoneTexte_DateCompSolo.setBounds(100, 300, 150, 25);
+    
+    JButton BoutonValider_AjoutSoloComp = new JButton("Valider");
+    BoutonValider_AjoutSoloComp.setBounds(100, 450, 250, 70);
+    
+    JButton BoutonAnnuler_AjoutSoloComp = new JButton("Annuler");
+    BoutonAnnuler_AjoutSoloComp.setBounds(450,450,250,70);
+    
+    JLabel Texte_AjoutEquipeComp = new JLabel("Ajouter une compétition en équipe");
+    Texte_AjoutEquipeComp.setFont(x);
+    Texte_AjoutEquipeComp.setBounds(150,50,1000,40);
+    fenetre.setLayout(new FlowLayout());
+    
+    JLabel Texte_NomCompEquipe = new JLabel("Nom compétition");	
+    Texte_NomCompEquipe.setFont(y);
+    Texte_NomCompEquipe.setBounds(100,125,300,120);
+    fenetre.setLayout(new FlowLayout());
+    
+    JTextField ZoneTexte_NomCompEquipe =new JTextField();
+    ZoneTexte_NomCompEquipe.setBounds(100, 200, 150, 25);
+    
+    JLabel Texte_DateCompEquipe = new JLabel("Date compétition");	
+    Texte_DateCompEquipe.setFont(y);
+    Texte_DateCompEquipe.setBounds(100,225,300,120);
+    fenetre.setLayout(new FlowLayout());
+    
+    JTextField ZoneTexte_DateCompEquipe =new JTextField();
+    ZoneTexte_DateCompEquipe.setBounds(100, 300, 150, 25);
+    
+    JButton BoutonValider_AjoutEquipeComp = new JButton("Valider");
+    BoutonValider_AjoutEquipeComp.setBounds(100, 450, 250, 70);
+    
+    JButton BoutonAnnuler_AjoutEquipeComp = new JButton("Annuler");
+    BoutonAnnuler_AjoutEquipeComp.setBounds(450,450,250,70);
+    
+    
+    JTextField ZoneTexte_NomCompGerer =new JTextField();
+    ZoneTexte_NomCompGerer.setBounds(100, 100, 150, 25);
+   
+    JTextField ZoneTexte_DateCompGerer =new JTextField();
+    ZoneTexte_DateCompGerer.setBounds(300, 100, 150, 25);
+    
+    JTextField ZoneTexte_TypeCompGerer =new JTextField();
+    ZoneTexte_TypeCompGerer.setBounds(500, 100, 150, 25);
+    
+    JButton BoutonAnnuler_GererComp = new JButton("Annuler");
+    BoutonAnnuler_GererComp.setBounds(450, 450, 250, 70);
+  
+	JTextField ChampNom1 = new JTextField("");
+		ChampNom1.setBounds(100, 150, 150, 25);
+		ChampNom1.setEditable(false);
+		
+		JTextField ChampDate1 = new JTextField("");
+		ChampDate1.setBounds(300, 150, 150, 25);
+		ChampDate1.setEditable(false);
+
+		JTextField ChampType1 = new JTextField("");
+		ChampType1.setBounds(500, 150, 150, 25);
+		ChampType1.setEditable(false);
+
+    JButton BoutonNom_GererComp = new JButton("Gérer");
+	BoutonNom_GererComp.setBounds(650, 150, 100, 50); 
+	
+	 JLabel Texte_NomGererComp = new JLabel ("Nom de la compétition");
+        Texte_NomGererComp.setFont(x);
+        Texte_NomGererComp.setBounds(280,50,1000,40);
+        fenetre.setLayout(new FlowLayout());
+        
+        JLabel Texte_AjoutPart = new JLabel("Ajouter un participant / équipe");	
+        Texte_AjoutPart.setFont(y);
+        Texte_AjoutPart.setBounds(50,100,300,120);
+        fenetre.setLayout(new FlowLayout());
+        
+        JComboBox<String> ComboBox_AjoutPart = new JComboBox<String>();
+        ComboBox_AjoutPart.setBounds(65,200,150,30);
+        
+        JButton BoutonAjouter_AjoutPart = new JButton("Ajouter");
+        BoutonAjouter_AjoutPart.setBounds(250,200,100,50);
+        
+        JLabel Texte_SupprimerPart = new JLabel("Supprimer un participant / équipe");
+        Texte_SupprimerPart.setFont(y);
+        Texte_SupprimerPart.setBounds(50,300,300,120);
+        fenetre.setLayout(new FlowLayout());
+        
+        JComboBox<String> ComboBox_SupprimerPart = new JComboBox<String>();
+        ComboBox_SupprimerPart.setBounds(65,400,150,30);
+       
+        JButton BoutonSupprimer_SupprimerPart = new JButton("Supprimer");
+        BoutonSupprimer_SupprimerPart.setBounds(250,400,100,50);
+        
+        JLabel Texte_ModifierDateComp = new JLabel("Modifier la date de la compétition");
+        Texte_ModifierDateComp.setFont(y);
+        Texte_ModifierDateComp.setBounds(450,100,300,120);
+        fenetre.setLayout(new FlowLayout());
+        
+        JButton BoutonModifier_ModifDateComp = new JButton("Modifier");
+        BoutonModifier_ModifDateComp.setBounds(650,200,100,50);
+        
+        JTextField ZoneTexte_ModifierDateComp =new JTextField();
+        ZoneTexte_ModifierDateComp.setBounds(475, 200, 150, 25);
+        
+        JLabel Texte_SupprimerComp = new JLabel("Supprimer la compétition");
+        Texte_SupprimerComp.setFont(y);
+        Texte_SupprimerComp.setBounds(450,300,300,120);
+        fenetre.setLayout(new FlowLayout());
+        
+        JButton BoutonSupprimer_SuppComp = new JButton("Supprimer la compétition !");
+        BoutonSupprimer_SuppComp.setBounds(500,400,200,50);
+	
+        JButton BoutonRetour_NomComp = new JButton("Retour");
+        BoutonRetour_NomComp.setBounds(650, 500, 100, 50);
+    
+
+	
+		
+	
+    BoutonComp_Accueil.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	fenetre.remove(BoutonPersonne_Accueil);
+        	fenetre.remove(BoutonComp_Accueil); 
+        	fenetre.remove(BoutonEquipe_Accueil); 
+        	fenetre.remove(Texte_Accueil); 	
+        	
+        	fenetre.add(BoutonGestion_Comp);
+        	fenetre.add(BoutonAjout_Comp);
+        	fenetre.add(Texte_Comp);
+        	fenetre.add(BoutonRetour_Comp);
+        	fenetre.setTitle("Competition");
+
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+
+        }
+    });
+    
+    
+    BoutonRetour_Comp.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	fenetre.add(BoutonPersonne_Accueil);
+        	fenetre.add(BoutonComp_Accueil);
+        	fenetre.add(BoutonEquipe_Accueil);
+        	fenetre.add(Texte_Accueil);
+        	
+        	fenetre.remove(BoutonGestion_Comp);
+        	fenetre.remove(BoutonAjout_Comp);
+        	fenetre.remove(Texte_Comp);
+        	fenetre.remove(BoutonRetour_Comp);
+        	fenetre.setTitle("Accueil");
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+    
+    
+    
+    BoutonAjout_Comp.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+      
+        	fenetre.add(BoutonSolo_AjoutComp);
+        	fenetre.add(BoutonEquipe_AjoutComp);
+        	fenetre.add(Texte_TypeComp);
+        	fenetre.add(BoutonRetour_AjoutComp);
+        	
+        	fenetre.remove(BoutonGestion_Comp);
+        	fenetre.remove(BoutonAjout_Comp);
+        	fenetre.remove(Texte_Comp);
+        	fenetre.remove(BoutonRetour_Comp);
+        	fenetre.setTitle("Type compétition");
+        	fenetre.repaint();
+
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+    BoutonRetour_AjoutComp.addActionListener(new ActionListener(){
+    	public void actionPerformed(ActionEvent e) {
+
+    		fenetre.remove(BoutonSolo_AjoutComp);
+        	fenetre.remove(BoutonEquipe_AjoutComp);
+        	fenetre.remove(Texte_TypeComp);
+        	fenetre.remove(BoutonRetour_AjoutComp);
+        	
+        	fenetre.add(BoutonGestion_Comp);
+        	fenetre.add(BoutonAjout_Comp);
+        	fenetre.add(Texte_Comp);
+        	fenetre.add(BoutonRetour_Comp);
+        	fenetre.setTitle("Competition");
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+    		}});
+    
+    BoutonSolo_AjoutComp.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	
+        	fenetre.add(ZoneTexte_NomCompSolo);
+        	fenetre.add(Texte_NomCompSolo);
+        	fenetre.add(ZoneTexte_DateCompSolo);
+        	fenetre.add(Texte_DateCompSolo);
+        	fenetre.add(BoutonValider_AjoutSoloComp);
+        	fenetre.add(BoutonAnnuler_AjoutSoloComp);
+        	fenetre.add(Texte_AjoutSoloComp);
+        	
+        	fenetre.remove(BoutonSolo_AjoutComp);
+        	fenetre.remove(BoutonEquipe_AjoutComp);
+        	fenetre.remove(Texte_TypeComp);
+        	fenetre.remove(BoutonRetour_AjoutComp);
+        	fenetre.setTitle("Ajout compétition solo");
+        	fenetre.repaint();
+        		
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+    
+    BoutonAnnuler_AjoutSoloComp.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	
+        	fenetre.remove(ZoneTexte_NomCompSolo);
+        	fenetre.remove(Texte_NomCompSolo);
+        	fenetre.remove(ZoneTexte_DateCompSolo);
+        	fenetre.remove(Texte_DateCompSolo);
+        	fenetre.remove(BoutonValider_AjoutSoloComp);
+        	fenetre.remove(BoutonAnnuler_AjoutSoloComp);
+        	fenetre.remove(Texte_AjoutSoloComp);
+        	
+        	fenetre.add(BoutonSolo_AjoutComp);
+        	fenetre.add(BoutonEquipe_AjoutComp);
+        	fenetre.add(Texte_TypeComp);
+        	fenetre.add(BoutonRetour_AjoutComp);
+        	fenetre.setTitle("Type Compétition");
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+    BoutonEquipe_AjoutComp.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	
+        	fenetre.add(ZoneTexte_NomCompEquipe);
+        	fenetre.add(Texte_NomCompEquipe);
+        	fenetre.add(ZoneTexte_DateCompEquipe);
+        	fenetre.add(Texte_DateCompEquipe);
+        	fenetre.add(BoutonValider_AjoutEquipeComp);
+        	fenetre.add(BoutonAnnuler_AjoutEquipeComp);
+        	fenetre.add(Texte_AjoutEquipeComp);
+        	
+        	fenetre.remove(BoutonSolo_AjoutComp);
+        	fenetre.remove(BoutonEquipe_AjoutComp);
+        	fenetre.remove(Texte_TypeComp);
+        	fenetre.remove(BoutonRetour_AjoutComp);
+        	fenetre.setTitle("Ajout compétition solo");
+        	fenetre.repaint();
+        		
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+    
+    BoutonAnnuler_AjoutEquipeComp.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	
+        	fenetre.remove(ZoneTexte_NomCompEquipe);
+        	fenetre.remove(Texte_NomCompEquipe);
+        	fenetre.remove(ZoneTexte_DateCompEquipe);
+        	fenetre.remove(Texte_DateCompEquipe);
+        	fenetre.remove(BoutonValider_AjoutEquipeComp);
+        	fenetre.remove(BoutonAnnuler_AjoutEquipeComp);
+        	fenetre.remove(Texte_AjoutEquipeComp);
+        	
+        	fenetre.add(BoutonSolo_AjoutComp);
+        	fenetre.add(BoutonEquipe_AjoutComp);
+        	fenetre.add(Texte_TypeComp);
+        	fenetre.add(BoutonRetour_AjoutComp);
+        	fenetre.setTitle("Type Compétition");
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+    BoutonGestion_Comp.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	
+        	fenetre.add(Texte_GererComp);
+        	fenetre.add(ZoneTexte_NomCompGerer);
+        	fenetre.add(ZoneTexte_DateCompGerer);
+        	fenetre.add(ZoneTexte_TypeCompGerer);
+        	fenetre.add(BoutonAnnuler_GererComp);
+			fenetre.add(BoutonNom_GererComp);	
+        	ZoneTexte_NomCompGerer.setText("Nom de la compétition");
+        	ZoneTexte_NomCompGerer.setEditable(false);
+        	
+        	ZoneTexte_DateCompGerer.setText("Date de la compétition");
+        	ZoneTexte_DateCompGerer.setEditable(false);
+        	
+        	ZoneTexte_TypeCompGerer.setText("Type de compétition");
+        	ZoneTexte_TypeCompGerer.setEditable(false);
+
+        	fenetre.add(ChampNom1);
+        	fenetre.add(ChampDate1);
+        	fenetre.add(ChampType1);
+
+  
+        	
+        	fenetre.remove(BoutonGestion_Comp);
+        	fenetre.remove(BoutonAjout_Comp);
+        	fenetre.remove(Texte_Comp);
+        	fenetre.remove(BoutonRetour_Comp);
+        	fenetre.setTitle("Gérer une compétition");
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+    BoutonAnnuler_GererComp.addActionListener(new ActionListener(){
+    	public void actionPerformed(ActionEvent e) {
+
+        	fenetre.add(BoutonGestion_Comp);
+        	fenetre.add(BoutonAjout_Comp);
+        	fenetre.add(Texte_Comp);
+        	fenetre.add(BoutonRetour_Comp);
+        	
+
+        	fenetre.remove(ChampDate1);
+        	fenetre.remove(ChampNom1);
+        	fenetre.remove(ChampType1);
+        	fenetre.remove(Texte_GererComp);
+        	fenetre.remove(ZoneTexte_NomCompGerer);
+        	fenetre.remove(ZoneTexte_DateCompGerer);
+        	fenetre.remove(ZoneTexte_TypeCompGerer);
+        	fenetre.remove(BoutonAnnuler_GererComp);
+        	fenetre.remove(BoutonNom_GererComp);
+        	
+
+        	fenetre.setTitle("Competition");
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+    		}});
+    
+    
+    BoutonNom_GererComp.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	
+        	fenetre.add(ComboBox_AjoutPart);
+        	fenetre.add(ComboBox_SupprimerPart);
+        	fenetre.add(Texte_NomGererComp);
+        	fenetre.add(Texte_AjoutPart);
+        	fenetre.add(Texte_SupprimerPart);
+        	fenetre.add(Texte_ModifierDateComp);
+        	fenetre.add(Texte_SupprimerComp);
+        	fenetre.add(BoutonRetour_NomComp);
+        	fenetre.add(ZoneTexte_ModifierDateComp);
+        	fenetre.add(BoutonAjouter_AjoutPart);
+        	fenetre.add(BoutonModifier_ModifDateComp);
+        	fenetre.add(BoutonSupprimer_SuppComp);
+        	fenetre.add(BoutonSupprimer_SupprimerPart);
+        	
+        	fenetre.remove(Texte_GererComp);
+        	fenetre.remove(ZoneTexte_NomCompGerer);
+        	fenetre.remove(ZoneTexte_DateCompGerer);
+        	fenetre.remove(ZoneTexte_TypeCompGerer);
+        	fenetre.remove(BoutonAnnuler_GererComp);
+			fenetre.remove(BoutonNom_GererComp);
+			fenetre.remove(ChampDate1);
+        	fenetre.remove(ChampNom1);
+        	fenetre.remove(ChampType1);
+        	fenetre.setTitle("Nom de la compétition");
+        	fenetre.repaint();
+
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+    BoutonRetour_NomComp.addActionListener(new ActionListener(){
+    	public void actionPerformed(ActionEvent e) {
+
+    		fenetre.remove(ComboBox_AjoutPart);
+        	fenetre.remove(ComboBox_SupprimerPart);
+        	fenetre.remove(Texte_NomGererComp);
+        	fenetre.remove(Texte_AjoutPart);
+        	fenetre.remove(Texte_SupprimerPart);
+        	fenetre.remove(Texte_ModifierDateComp);
+        	fenetre.remove(Texte_SupprimerComp);
+        	fenetre.remove(BoutonRetour_NomComp);
+        	fenetre.remove(ZoneTexte_ModifierDateComp);
+        	fenetre.remove(BoutonAjouter_AjoutPart);
+        	fenetre.remove(BoutonModifier_ModifDateComp);
+        	fenetre.remove(BoutonSupprimer_SuppComp);
+        	fenetre.remove(BoutonSupprimer_SupprimerPart);
+        	
+        	fenetre.add(Texte_GererComp);
+        	fenetre.add(ZoneTexte_NomCompGerer);
+        	fenetre.add(ZoneTexte_DateCompGerer);
+        	fenetre.add(ZoneTexte_TypeCompGerer);
+        	fenetre.add(BoutonAnnuler_GererComp);
+			fenetre.add(BoutonNom_GererComp);
+			fenetre.add(ChampNom1);
+        	fenetre.add(ChampDate1);
+        	fenetre.add(ChampType1);
+        	fenetre.setTitle("Gérer une compétition");
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+    		}});
+
+
+    //EQUIPE
+    JLabel Texte_Equipe = new JLabel("MENU EQUIPES");
+    Texte_Equipe.setFont(x);
+    Texte_Equipe.setBounds(280,100,1000,40);
+    fenetre.setLayout(new FlowLayout());
+    
+    JLabel Texte_AjoutEquipe = new JLabel("Ajout Equipe");
+    Texte_AjoutEquipe.setFont(x);
+    Texte_AjoutEquipe.setBounds(300,50,1000,40);
+    fenetre.setLayout(new FlowLayout());
+    
+    JLabel Texte_NomEquipe = new JLabel("Nom Equipe");
+    Texte_NomEquipe.setFont(y);
+    Texte_NomEquipe.setBounds(150,100,100,120);
+    fenetre.setLayout(new FlowLayout());
+    
+    JLabel Texte_MembresEquipe = new JLabel("Pour ajouter des membres, aller dans 'gérer les équipes'");
+    Texte_MembresEquipe.setFont(y);
+    Texte_MembresEquipe.setBounds(150,250,500,120);
+    fenetre.setLayout(new FlowLayout());
+    
+    JButton BoutonAjout_Equipe = new JButton("Ajouter une équipe");
+    BoutonAjout_Equipe.setBounds(130, 300, 200, 100);
+
+
+    JButton BoutonGestion_Equipe = new JButton("Gérer les équipes");
+    BoutonGestion_Equipe.setBounds(450, 300, 200, 100);
+    
+    
+    JButton BoutonRetour_Equipe = new JButton("Retour");
+    BoutonRetour_Equipe.setBounds(600, 450, 100, 50);
+    
+    JTextField ZoneTexte_AjoutEquipe = new JTextField();
+    ZoneTexte_AjoutEquipe.setBounds(150,200,150,25);
+    
+    JButton BoutonValider_Equipe = new JButton("Valider");
+    BoutonValider_Equipe.setBounds(100, 450, 250, 70);
+    
+    JButton BoutonAnnuler_AjoutEquipe = new JButton("Annuler");
+    BoutonAnnuler_AjoutEquipe.setBounds(450, 450, 250, 70);
+    
+    JLabel Texte_GererEquipe = new JLabel("Gérer les équipes");
+    Texte_GererEquipe.setFont(x);
+    Texte_GererEquipe.setBounds(300,50,1000,40);
+    fenetre.setLayout(new FlowLayout());
+    
+    JButton BoutonNom_GererEquipe = new JButton("Gérer");
+	BoutonNom_GererEquipe.setBounds(650, 150, 100, 50); 
+    
+    JTextField ZoneTexte_NomEquipeGerer =new JTextField();
+    ZoneTexte_NomEquipeGerer.setBounds(100, 100, 150, 25);
+    
+    JTextField ZoneTexte_NbMembreGerer =new JTextField();
+    ZoneTexte_NbMembreGerer.setBounds(300, 100, 150, 25);
+    
+    JTextField ZoneTexte_ListeMembreGerer =new JTextField();
+    ZoneTexte_ListeMembreGerer.setBounds(500, 100, 150, 25);
+    
+    JComboBox<String> ComboBox_ListeMembreGerer = new JComboBox<String>();
+    ComboBox_ListeMembreGerer.setBounds(500,150,100,30);
+    
+    JButton BoutonAnnuler_GestionEquipe = new JButton("Annuler");
+    BoutonAnnuler_GestionEquipe.setBounds(450,450,250,70);
+    
+    JLabel Texte_NomGestionEquipe = new JLabel("Gérer le nom de l'équipe");
+    Texte_NomGestionEquipe.setFont(x);
+    Texte_NomGestionEquipe.setBounds(225,50,1000,40);
+    fenetre.setLayout(new FlowLayout());
+    
+    JLabel Texte_AjoutMembre = new JLabel("Ajouter un membre");	
+    Texte_AjoutMembre.setFont(y);
+    Texte_AjoutMembre.setBounds(50,100,300,120);
+    fenetre.setLayout(new FlowLayout());
+    
+    JComboBox<String> ComboBox_AjoutMembre = new JComboBox<String>();
+    ComboBox_AjoutMembre.setBounds(65,200,150,30);
+    
+    JButton BoutonAjouter_AjoutMembre = new JButton("Ajouter");
+    BoutonAjouter_AjoutMembre.setBounds(250,200,100,50);
+    
+    JLabel Texte_SupprimerMembre = new JLabel("Supprimer un membre");
+    Texte_SupprimerMembre.setFont(y);
+    Texte_SupprimerMembre.setBounds(50,300,300,120);
+    fenetre.setLayout(new FlowLayout());
+    
+    JComboBox<String> ComboBox_SupprimerMembre = new JComboBox<String>();
+    ComboBox_SupprimerMembre.setBounds(65,400,150,30);
+   
+    JButton BoutonSupprimer_SuppMembre = new JButton("Supprimer");
+    BoutonSupprimer_SuppMembre.setBounds(250,400,100,50);
+    
+    JLabel Texte_ModifierNomEquipe = new JLabel("Modifier le nom de l'équipe");
+    Texte_ModifierNomEquipe.setFont(y);
+    Texte_ModifierNomEquipe.setBounds(450,100,300,120);
+    fenetre.setLayout(new FlowLayout());
+    
+    JButton BoutonModifier_ModifNomEquipe = new JButton("Modifier");
+    BoutonModifier_ModifNomEquipe.setBounds(650,200,100,50);
+    
+    JTextField ZoneTexte_ModifierNomEquipe =new JTextField();
+    ZoneTexte_ModifierNomEquipe.setBounds(475, 200, 150, 25);
+    
+    JLabel Texte_SupprimerEquipe = new JLabel("Supprimer l'équipe");
+    Texte_SupprimerEquipe.setFont(y);
+    Texte_SupprimerEquipe.setBounds(450,300,300,120);
+    fenetre.setLayout(new FlowLayout());
+    
+    JButton BoutonSupprimer_SupprimerEquipe = new JButton("Supprimer la compétition !");
+    BoutonSupprimer_SupprimerEquipe.setBounds(500,400,200,50);
+    
+    JButton BoutonRetour_NomEquipe = new JButton("Retour");
+	BoutonRetour_NomEquipe.setBounds(650, 500, 100, 50);
+    
+
+   
+        
+    
+    
+    
+    BoutonEquipe_Accueil.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	fenetre.add(BoutonAjout_Equipe);
+        	fenetre.add(Texte_Equipe); 
+        	fenetre.add(BoutonGestion_Equipe); 
+        	fenetre.add(BoutonRetour_Equipe);
+        	fenetre.setTitle("Equipe");
+        	
+        	
+        	fenetre.remove(BoutonEquipe_Accueil);
+        	fenetre.remove(BoutonComp_Accueil);
+        	fenetre.remove(BoutonPersonne_Accueil);
+        	fenetre.remove(Texte_Accueil);
+        	
+        	
+
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+    BoutonRetour_Equipe.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	fenetre.add(BoutonPersonne_Accueil);
+        	fenetre.add(BoutonComp_Accueil);
+        	fenetre.add(BoutonEquipe_Accueil);
+        	fenetre.add(Texte_Accueil);
+        	
+        	fenetre.remove(BoutonGestion_Equipe);
+        	fenetre.remove(BoutonAjout_Equipe);
+        	fenetre.remove(Texte_Equipe);
+        	fenetre.remove(BoutonRetour_Equipe);
+        	fenetre.setTitle("Accueil");
+        	fenetre.repaint();
+
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+   
+    
+    BoutonAjout_Equipe.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	
+        	fenetre.add(ZoneTexte_AjoutEquipe);
+        	fenetre.add(Texte_NomEquipe);
+        	fenetre.add(Texte_AjoutEquipe);
+        	fenetre.add(Texte_MembresEquipe);
+        	fenetre.add(BoutonValider_Equipe);
+        	fenetre.add(BoutonAnnuler_AjoutEquipe);
+        	
+        	fenetre.remove(BoutonGestion_Equipe);
+        	fenetre.remove(BoutonAjout_Equipe);
+        	fenetre.remove(Texte_Equipe);
+        	fenetre.remove(BoutonRetour_Equipe);
+        	fenetre.setTitle("Ajout Equipe");
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+     BoutonValider_Equipe.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+    	
+
+    	try {
+		     Class.forName("com.mysql.jdbc.Driver");
+		     Connection con = DriverManager.getConnection(url, user, passwd);
+		     System.out.println("équipe ajouté !");
+		     Statement state = con.createStatement();
+
+		     ResultSet myRs1 = state.executeQuery("select * from equipe");
+				
+				nombreEquipe= 0;
+				while(myRs1.next()) 
+				{
+					nombreEquipe++;
+					
+				}
+		     
+		     
+		     
+		     
+		
+		      state.executeUpdate("INSERT INTO `equipe` (`Num_equipe`, `Nom_equipe`) "
++ "VALUES ('"+(nombreEquipe+1)+"', '"+ZoneTexte_AjoutEquipe.getText()+"');");
+
+
+		} 
+    	catch (Exception F) 
+    	{
+		     F.printStackTrace();
+		     System.out.println("Erreur");
+		     System.exit(0);
+		    }
+    	fenetre.remove(ZoneTexte_AjoutEquipe);
+    	fenetre.remove(Texte_NomEquipe);
+    	fenetre.remove(Texte_AjoutEquipe);
+    	fenetre.remove(Texte_MembresEquipe);
+    	fenetre.remove(BoutonValider_Equipe);
+    	fenetre.remove(BoutonAnnuler_AjoutEquipe);
+    	ZoneTexte_AjoutEquipe.setText("");
+    	
+    	fenetre.add(BoutonGestion_Equipe);
+    	fenetre.add(BoutonAjout_Equipe);
+    	fenetre.add(Texte_Equipe);
+    	fenetre.add(BoutonRetour_Equipe);
+    	fenetre.setTitle("Equipe");
+    	fenetre.repaint();
+    	
+    	Fond.setIcon(new ImageIcon(img));
+        
+        fenetre.getContentPane().add(Fond);
+    }
+   }); 
+    
+    BoutonAnnuler_AjoutEquipe.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	
+        	fenetre.remove(ZoneTexte_AjoutEquipe);
+        	fenetre.remove(Texte_NomEquipe);
+        	fenetre.remove(Texte_AjoutEquipe);
+        	fenetre.remove(Texte_MembresEquipe);
+        	fenetre.remove(BoutonValider_Equipe);
+        	fenetre.remove(BoutonAnnuler_AjoutEquipe);
+        	ZoneTexte_AjoutEquipe.setText("");
+        	
+        	fenetre.add(BoutonGestion_Equipe);
+        	fenetre.add(BoutonAjout_Equipe);
+        	fenetre.add(Texte_Equipe);
+        	fenetre.add(BoutonRetour_Equipe);
+        	fenetre.setTitle("Equipe");
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+    BoutonGestion_Equipe.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	
+        	fenetre.add(Texte_GererEquipe);
+        	fenetre.add(ZoneTexte_NomEquipeGerer);
+        	fenetre.add(ZoneTexte_NbMembreGerer);
+        	fenetre.add(ZoneTexte_ListeMembreGerer);
+        	fenetre.add(BoutonAnnuler_GestionEquipe);
+			fenetre.add(BoutonNom_GererEquipe);	
+			fenetre.add(ComboBox_ListeMembreGerer);
+        	ZoneTexte_NomEquipeGerer.setText("Nom de l'équipe");
+        	ZoneTexte_NomEquipeGerer.setEditable(false);
+        	
+        	ZoneTexte_NbMembreGerer.setText("Nombres de membres");
+        	ZoneTexte_NbMembreGerer.setEditable(false);
+        	
+        	ZoneTexte_ListeMembreGerer.setText("Listes des membres");
+        	ZoneTexte_ListeMembreGerer.setEditable(false);
+
+			
+  
+        	
+        	fenetre.remove(BoutonGestion_Equipe);
+        	fenetre.remove(BoutonAjout_Equipe);
+        	fenetre.remove(Texte_Equipe);
+        	fenetre.remove(BoutonRetour_Equipe);
+        	fenetre.setTitle("Gérer les équipes");
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+    BoutonAnnuler_GestionEquipe.addActionListener(new ActionListener(){
+    	public void actionPerformed(ActionEvent e) {
+
+    		fenetre.remove(Texte_GererEquipe);
+        	fenetre.remove(ZoneTexte_NomEquipeGerer);
+        	fenetre.remove(ZoneTexte_NbMembreGerer);
+        	fenetre.remove(ZoneTexte_ListeMembreGerer);
+        	fenetre.remove(BoutonAnnuler_GestionEquipe);
+			fenetre.remove(BoutonNom_GererEquipe);	
+			fenetre.remove(ComboBox_ListeMembreGerer);
+        	
+
+		
+        	fenetre.add(BoutonGestion_Equipe);
+        	fenetre.add(BoutonAjout_Equipe);
+        	fenetre.add(Texte_Equipe);
+        	fenetre.add(BoutonRetour_Equipe);
+        	
+
+        	fenetre.setTitle("Equipe");
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+    		}});
+    
+    
+    BoutonNom_GererEquipe.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	
+        	fenetre.add(ComboBox_AjoutMembre);
+        	fenetre.add(ComboBox_SupprimerMembre);
+        	fenetre.add(Texte_NomGestionEquipe);
+        	fenetre.add(Texte_AjoutMembre);
+        	fenetre.add(Texte_SupprimerMembre);
+        	fenetre.add(Texte_ModifierNomEquipe);
+        	fenetre.add(Texte_SupprimerEquipe);
+        	fenetre.add(BoutonRetour_NomEquipe);
+        	fenetre.add(ZoneTexte_ModifierNomEquipe);
+        	fenetre.add(BoutonAjouter_AjoutMembre);
+        	fenetre.add(BoutonModifier_ModifNomEquipe);
+        	fenetre.add(BoutonSupprimer_SuppMembre);
+        	fenetre.add(BoutonSupprimer_SupprimerEquipe);
+        	
+        	fenetre.remove(Texte_GererEquipe);
+        	fenetre.remove(ZoneTexte_NomEquipeGerer);
+        	fenetre.remove(ZoneTexte_NbMembreGerer);
+        	fenetre.remove(ZoneTexte_ListeMembreGerer);
+        	fenetre.remove(BoutonAnnuler_GestionEquipe);
+			fenetre.remove(BoutonNom_GererEquipe);	
+			fenetre.remove(ComboBox_ListeMembreGerer);
+        	fenetre.setTitle("Gérer nom de l'équipe");
+        	fenetre.repaint();
+
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+        }
+    });
+    
+    BoutonRetour_NomEquipe.addActionListener(new ActionListener(){
+    	public void actionPerformed(ActionEvent e) {
+
+    		fenetre.remove(ComboBox_AjoutMembre);
+        	fenetre.remove(ComboBox_SupprimerMembre);
+        	fenetre.remove(Texte_NomGestionEquipe);
+        	fenetre.remove(Texte_AjoutMembre);
+        	fenetre.remove(Texte_SupprimerMembre);
+        	fenetre.remove(Texte_ModifierNomEquipe);
+        	fenetre.remove(Texte_SupprimerEquipe);
+        	fenetre.remove(BoutonRetour_NomEquipe);
+        	fenetre.remove(ZoneTexte_ModifierNomEquipe);
+        	fenetre.remove(BoutonAjouter_AjoutMembre);
+        	fenetre.remove(BoutonModifier_ModifNomEquipe);
+        	fenetre.remove(BoutonSupprimer_SuppMembre);
+        	fenetre.remove(BoutonSupprimer_SupprimerEquipe);
+        	
+        	fenetre.add(Texte_GererEquipe);
+        	fenetre.add(ZoneTexte_NomEquipeGerer);
+        	fenetre.add(ZoneTexte_NbMembreGerer);
+        	fenetre.add(ZoneTexte_ListeMembreGerer);
+        	fenetre.add(BoutonAnnuler_GestionEquipe);
+			fenetre.add(BoutonNom_GererEquipe);	
+			fenetre.add(ComboBox_ListeMembreGerer);
+        	
+        	fenetre.setTitle("Gérer une compétition");
+        	fenetre.repaint();
+        	
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond);
+    		}});
+
+    //PERSONNE   
+
+    JLabel Texte_Personne = new JLabel("MENU PERSONNES");
+    Texte_Personne.setFont(x);
+    Texte_Personne.setBounds(260, 100, 1000, 40);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JLabel Texte_AjoutPersonne = new JLabel("Ajout Personne");
+    Texte_AjoutPersonne.setFont(x);
+    Texte_AjoutPersonne.setBounds(300, 50, 1000, 40);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JButton BoutonAjout_Personne = new JButton("Ajouter une personne");
+    BoutonAjout_Personne.setBounds(130, 300, 200, 100);
+
+  
+    
+    
+    
+    
+    JButton BoutonGestion_Personne = new JButton("Gérer les personnes");
+    BoutonGestion_Personne.setBounds(450, 300, 200, 100);
+
+    JLabel Texte_NomPersonne = new JLabel("Nom Personne");
+    Texte_NomPersonne.setFont(y);
+    Texte_NomPersonne.setBounds(150, 100, 500, 120);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JLabel Texte_PrenomPersonne = new JLabel("Prénom Personne");
+    Texte_PrenomPersonne.setFont(y);
+    Texte_PrenomPersonne.setBounds(500, 100, 500, 120);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JLabel Texte_VillePersonne = new JLabel("Ville Personne");
+    Texte_VillePersonne.setFont(y);
+    Texte_VillePersonne.setBounds(150, 200, 500, 120);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JLabel Texte_TelephonePersonne = new JLabel("Téléphone");
+    Texte_TelephonePersonne.setFont(y);
+    Texte_TelephonePersonne.setBounds(500, 200, 500, 120);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JLabel Texte_EquipePersonne = new JLabel("Pour mettre les personnes dans des équipes, aller dans 'gérer les équipes'");
+    Texte_EquipePersonne.setFont(y);
+    Texte_EquipePersonne.setBounds(50, 300, 600, 120);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JLabel Texte_CompPersonne = new JLabel("Pour mettre les personnes dans des compétitions, aller dans 'gérer les compétitions'");
+    Texte_CompPersonne.setFont(y);
+    Texte_CompPersonne.setBounds(50, 350, 600, 120);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JTextField ZoneTexte_NomPersonne = new JTextField();
+    ZoneTexte_NomPersonne.setBounds(150, 200, 150, 25);
+
+
+    JTextField ZoneTexte_PrenomPersonne = new JTextField();
+    ZoneTexte_PrenomPersonne.setBounds(500, 200, 150, 25);
+
+    JTextField ZoneTexte_VillePersonne = new JTextField();
+    ZoneTexte_VillePersonne.setBounds(150, 300, 150, 25);
+
+    JTextField ZoneTexte_TelPersonne = new JTextField();
+    ZoneTexte_TelPersonne.setBounds(500, 300, 150, 25);
+
+    JButton BoutonValider_AjoutPersonne = new JButton("Valider");
+    BoutonValider_AjoutPersonne.setBounds(100, 450, 250, 70);
+
+    JButton BoutonAnnuler_AjoutPersonne = new JButton("Annuler");
+    BoutonAnnuler_AjoutPersonne.setBounds(450, 450, 250, 70);
+
+    JButton BoutonRetour_Personne = new JButton("Retour");
+    BoutonRetour_Personne.setBounds(600, 450, 100, 50);
+
+    JLabel Texte_GererPersonne = new JLabel("Gérer les personnes");
+    Texte_GererPersonne.setFont(x);
+    Texte_GererPersonne.setBounds(250, 50, 1000, 40);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JButton BoutonNom_GererPersonne = new JButton("Gérer");
+    BoutonNom_GererPersonne.setBounds(650, 150, 100, 50);
+
+    JTextField ZoneTexte_NomPersonneGerer = new JTextField();
+    ZoneTexte_NomPersonneGerer.setBounds(50, 100, 125, 25);
+
+    JTextField ZoneTexte_PrenomPersonneGerer = new JTextField();
+    ZoneTexte_PrenomPersonneGerer.setBounds(200, 100, 135, 25);
+
+    JTextField ZoneTexte_VillePersonneGerer = new JTextField();
+    ZoneTexte_VillePersonneGerer.setBounds(350, 100, 125, 25);
+
+    JTextField ZoneTexte_TelephoneGerer = new JTextField();
+    ZoneTexte_TelephoneGerer.setBounds(500, 100, 125, 25);
+
+    JButton BoutonAnnuler_GestionPersonne = new JButton("Annuler");
+    BoutonAnnuler_GestionPersonne.setBounds(450, 450, 250, 70);
+
+    JLabel Texte_NomGestionPersonne = new JLabel("Gérer le nom de la personne");
+    Texte_NomGestionPersonne.setFont(x);
+    Texte_NomGestionPersonne.setBounds(200, 50, 1000, 40);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JLabel Texte_ModifierNom = new JLabel("Modifier le nom");
+    Texte_ModifierNom.setFont(y);
+    Texte_ModifierNom.setBounds(50, 100, 300, 120);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JTextField ZoneTexte_ModifierNomPersonne = new JTextField();
+    ZoneTexte_ModifierNomPersonne.setBounds(65, 200, 150, 30);
+
+    JButton BoutonModifier_NomPersonne = new JButton("Modifier");
+    BoutonModifier_NomPersonne.setBounds(250, 200, 100, 50);
+
+    JLabel Texte_ModifierPrenom = new JLabel("Modifier le prénom");
+    Texte_ModifierPrenom.setFont(y);
+    Texte_ModifierPrenom.setBounds(50, 300, 300, 120);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JTextField ZoneTexte_ModifierPrenomPersonne = new JTextField();
+    ZoneTexte_ModifierPrenomPersonne.setBounds(65, 400, 150, 30);
+
+    JButton BoutonModifier_PrenomPersonne = new JButton("Modifier");
+    BoutonModifier_PrenomPersonne.setBounds(250, 400, 100, 50);
+
+    JLabel Texte_ModifierTelephone = new JLabel("Modifier le téléphone");
+    Texte_ModifierTelephone.setFont(y);
+    Texte_ModifierTelephone.setBounds(450, 100, 300, 120);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JButton BoutonModifier_TelephonePersonne = new JButton("Modifier");
+    BoutonModifier_TelephonePersonne.setBounds(650, 200, 100, 50);
+
+    JTextField ZoneTexte_ModifierTelephonePersonne = new JTextField();
+    ZoneTexte_ModifierTelephonePersonne.setBounds(475, 200, 150, 25);
+
+    JLabel Texte_SupprimerPersonne = new JLabel("Supprimer la personne");
+    Texte_SupprimerPersonne.setFont(y);
+    Texte_SupprimerPersonne.setBounds(450, 300, 300, 120);
+    fenetre.getContentPane().setLayout(new FlowLayout());
+
+    JButton BoutonSupprimer_SupprimerPersonne = new JButton("Supprimer la compétition !");
+    BoutonSupprimer_SupprimerPersonne.setBounds(500, 400, 200, 50);
+
+    JButton BoutonRetour_NomPersonne = new JButton("Retour");
+    BoutonRetour_NomPersonne.setBounds(650, 500, 100, 50);
+
+    
+ 
+    
+    
+    
+
+
+    BoutonPersonne_Accueil.addActionListener(new ActionListener() {
+     public void actionPerformed(ActionEvent e) {
+      fenetre.getContentPane().add(BoutonAjout_Personne);
+      fenetre.getContentPane().add(Texte_Personne);
+      fenetre.getContentPane().add(BoutonGestion_Personne);
+      fenetre.getContentPane().add(BoutonRetour_Personne);
+      fenetre.setTitle("Personne");
+
+
+      fenetre.remove(BoutonEquipe_Accueil);
+      fenetre.remove(BoutonComp_Accueil);
+      fenetre.remove(BoutonPersonne_Accueil);
+      fenetre.remove(Texte_Accueil);
+
+
+
+      fenetre.repaint();
+
+      Fond.setIcon(new ImageIcon(img));
+      
+      fenetre.getContentPane().add(Fond);
+     }
+    });
+
+
+    
+    
+    
+    
+
+    BoutonRetour_Personne.addActionListener(new ActionListener() {
+     public void actionPerformed(ActionEvent e) {
+      fenetre.getContentPane().add(BoutonPersonne_Accueil);
+      fenetre.getContentPane().add(BoutonComp_Accueil);
+      fenetre.getContentPane().add(BoutonEquipe_Accueil);
+      fenetre.getContentPane().add(Texte_Accueil);
+
+
+      fenetre.remove(BoutonGestion_Personne);
+      fenetre.remove(BoutonAjout_Personne);
+      fenetre.remove(Texte_Personne);
+      fenetre.remove(BoutonRetour_Personne);
+      fenetre.setTitle("Accueil");
+      fenetre.repaint();
+
+      Fond.setIcon(new ImageIcon(img));
+      
+      fenetre.getContentPane().add(Fond);
+     }
+    });
+
+    BoutonAjout_Personne.addActionListener(new ActionListener() {
+     public void actionPerformed(ActionEvent e) {
+
+      fenetre.getContentPane().add(ZoneTexte_NomPersonne);
+      fenetre.getContentPane().add(ZoneTexte_PrenomPersonne);
+      fenetre.getContentPane().add(ZoneTexte_VillePersonne);
+      fenetre.getContentPane().add(ZoneTexte_TelPersonne);
+      fenetre.getContentPane().add(Texte_AjoutPersonne);
+      fenetre.getContentPane().add(Texte_NomPersonne);
+      fenetre.getContentPane().add(Texte_PrenomPersonne);
+      fenetre.getContentPane().add(Texte_VillePersonne);
+      fenetre.getContentPane().add(Texte_TelephonePersonne);
+      fenetre.getContentPane().add(Texte_EquipePersonne);
+      fenetre.getContentPane().add(Texte_CompPersonne);
+      fenetre.getContentPane().add(BoutonValider_AjoutPersonne);
+      fenetre.getContentPane().add(BoutonAnnuler_AjoutPersonne);
+     
+
+
+      fenetre.remove(BoutonGestion_Personne);
+      fenetre.remove(BoutonAjout_Personne);
+      fenetre.remove(Texte_Personne);
+      fenetre.remove(BoutonRetour_Personne);
+      fenetre.setTitle("Ajout Personne");
+      fenetre.repaint();
+
+      Fond.setIcon(new ImageIcon(img));
+      
+      fenetre.getContentPane().add(Fond);
+     }
+    });
+
+    
+    
+    
+    BoutonValider_AjoutPersonne.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	 
+        	try {
+			     Class.forName("com.mysql.jdbc.Driver");
+			     Connection con = DriverManager.getConnection(url, user, passwd);
+			     System.out.println("Personne ajouté !");
+			     Statement state = con.createStatement();
+
+			     ResultSet myRs1 = state.executeQuery("select * from candidat");
+					
+					nombrePersonne= 0;
+					while(myRs1.next()) 
+					{
+						nombrePersonne++;
+						
+					}
+			
+			      state.executeUpdate("INSERT INTO `candidat` (`Num_Candidat`, `Nom_Candidat`,`Prenom_Candidat`, `Ville_Candidat`,`Telephone_Candidat`) "
++ "VALUES ('"+(nombrePersonne+1)+"', '"+ZoneTexte_NomPersonne.getText()+"', '"+ZoneTexte_PrenomPersonne.getText()+"','"+ZoneTexte_VillePersonne.getText()+
+"','"+ZoneTexte_TelPersonne.getText()+"');");
+
+
+			} 
+        	catch (Exception F) 
+        	{
+			     F.printStackTrace();
+			     System.out.println("Erreur");
+			     System.exit(0);
+			    }
+        	ZoneTexte_NomPersonne.setText("");
+            ZoneTexte_PrenomPersonne.setText("");
+            ZoneTexte_VillePersonne.setText("");
+            ZoneTexte_TelPersonne.setText("");
+        	Fond.setIcon(new ImageIcon(img));
+            
+            fenetre.getContentPane().add(Fond); 
+        }
+    });
+        
+
+    BoutonAnnuler_AjoutPersonne.addActionListener(new ActionListener() {
+     public void actionPerformed(ActionEvent e) {
+
+      fenetre.remove(ZoneTexte_NomPersonne);
+      fenetre.remove(ZoneTexte_PrenomPersonne);
+      fenetre.remove(ZoneTexte_VillePersonne);
+      fenetre.remove(ZoneTexte_TelPersonne);
+      fenetre.remove(Texte_AjoutPersonne);
+      fenetre.remove(Texte_NomPersonne);
+      fenetre.remove(Texte_PrenomPersonne);
+      fenetre.remove(Texte_VillePersonne);
+      fenetre.remove(Texte_TelephonePersonne);
+      fenetre.remove(Texte_EquipePersonne);
+      fenetre.remove(Texte_CompPersonne);
+      fenetre.remove(BoutonValider_AjoutPersonne);
+      fenetre.remove(BoutonAnnuler_AjoutPersonne);
+      ZoneTexte_NomPersonne.setText("");
+      ZoneTexte_PrenomPersonne.setText("");
+      ZoneTexte_VillePersonne.setText("");
+      ZoneTexte_TelPersonne.setText("");
+
+      fenetre.getContentPane().add(BoutonGestion_Personne);
+      fenetre.getContentPane().add(BoutonAjout_Personne);
+      fenetre.getContentPane().add(Texte_Personne);
+      fenetre.getContentPane().add(BoutonRetour_Personne);
+      fenetre.setTitle("Personne");
+      fenetre.repaint();
+
+      Fond.setIcon(new ImageIcon(img));
+      
+      fenetre.getContentPane().add(Fond);
+     }
+    });
+
+    BoutonGestion_Personne.addActionListener(new ActionListener() {
+     public void actionPerformed(ActionEvent e) {
+
+      fenetre.getContentPane().add(Texte_GererPersonne);
+      fenetre.getContentPane().add(ZoneTexte_NomPersonneGerer);
+      fenetre.getContentPane().add(ZoneTexte_PrenomPersonneGerer);
+      fenetre.getContentPane().add(ZoneTexte_VillePersonneGerer);
+      fenetre.getContentPane().add(ZoneTexte_TelephoneGerer);
+      fenetre.getContentPane().add(BoutonAnnuler_GestionPersonne);
+      fenetre.getContentPane().add(BoutonNom_GererPersonne);
+      //fenetre.getContentPane().add(TableauxPersonnes);
+      
+      
+     
+    
+     
+      ZoneTexte_NomPersonneGerer.setText("Nom de la personne");
+      ZoneTexte_NomPersonneGerer.setEditable(false);
+
+      ZoneTexte_PrenomPersonneGerer.setText("Prénom de la personne");
+      ZoneTexte_PrenomPersonneGerer.setEditable(false);
+
+      ZoneTexte_VillePersonneGerer.setText("Ville de la personne");
+      ZoneTexte_VillePersonneGerer.setEditable(false);
+
+      ZoneTexte_TelephoneGerer.setText("Téléphone");
+      ZoneTexte_TelephoneGerer.setEditable(false);
+
+
+
+     
+      fenetre.remove(BoutonGestion_Personne);
+      fenetre.remove(BoutonAjout_Personne);
+      fenetre.remove(Texte_Personne);
+      fenetre.remove(BoutonRetour_Personne);
+      fenetre.setTitle("Gérer les personnes");
+      fenetre.repaint();
+
+      Fond.setIcon(new ImageIcon(img));
+      
+      fenetre.getContentPane().add(Fond);
+     }
+    });
+
+   
+    BoutonAnnuler_GestionPersonne.addActionListener(new ActionListener() {
+     public void actionPerformed(ActionEvent e) {
+
+      fenetre.getContentPane().add(BoutonGestion_Personne);
+      fenetre.getContentPane().add(BoutonAjout_Personne);
+      fenetre.getContentPane().add(Texte_Personne);
+      fenetre.getContentPane().add(BoutonRetour_Personne);
+      
+
+    
+      fenetre.remove(Texte_GererPersonne);
+      fenetre.remove(ZoneTexte_NomPersonneGerer);
+      fenetre.remove(ZoneTexte_PrenomPersonneGerer);
+      fenetre.remove(ZoneTexte_VillePersonneGerer);
+      fenetre.remove(ZoneTexte_TelephoneGerer);
+      fenetre.remove(BoutonAnnuler_GestionPersonne);
+      fenetre.remove(BoutonNom_GererPersonne);
+
+
+      fenetre.setTitle("Personnes");
+      fenetre.repaint();
+      
+      Fond.setIcon(new ImageIcon(img));
+      
+      fenetre.getContentPane().add(Fond);
+     }
+    });
+
+    BoutonNom_GererPersonne.addActionListener(new ActionListener() {
+     public void actionPerformed(ActionEvent e) {
+
+      fenetre.getContentPane().add(Texte_NomGestionPersonne);
+      fenetre.getContentPane().add(Texte_ModifierNom);
+      fenetre.getContentPane().add(Texte_ModifierPrenom);
+      fenetre.getContentPane().add(Texte_SupprimerPersonne);
+      fenetre.getContentPane().add(Texte_ModifierTelephone);
+      fenetre.getContentPane().add(BoutonRetour_NomPersonne);
+      fenetre.getContentPane().add(ZoneTexte_ModifierNomPersonne);
+      fenetre.getContentPane().add(ZoneTexte_ModifierPrenomPersonne);
+      fenetre.getContentPane().add(ZoneTexte_ModifierTelephonePersonne);
+      fenetre.getContentPane().add(BoutonModifier_NomPersonne);
+      fenetre.getContentPane().add(BoutonModifier_PrenomPersonne);
+      fenetre.getContentPane().add(BoutonModifier_TelephonePersonne);
+      fenetre.getContentPane().add(BoutonSupprimer_SupprimerPersonne);
+
+
+      fenetre.remove(Texte_GererPersonne);
+      fenetre.remove(ZoneTexte_NomPersonneGerer);
+      fenetre.remove(ZoneTexte_PrenomPersonneGerer);
+      fenetre.remove(ZoneTexte_VillePersonneGerer);
+      fenetre.remove(ZoneTexte_TelephoneGerer);
+      fenetre.remove(BoutonAnnuler_GestionPersonne);
+      fenetre.remove(BoutonNom_GererPersonne);
+      fenetre.setTitle("Gérer nom personne");
+      fenetre.repaint();
+
+      Fond.setIcon(new ImageIcon(img));
+      
+      fenetre.getContentPane().add(Fond);
+     }
+    });
+
+    BoutonRetour_NomPersonne.addActionListener(new ActionListener() {
+     public void actionPerformed(ActionEvent e) {
+
+      fenetre.remove(Texte_NomGestionPersonne);
+      fenetre.remove(Texte_ModifierNom);
+      fenetre.remove(Texte_ModifierPrenom);
+      fenetre.remove(Texte_SupprimerPersonne);
+      fenetre.remove(Texte_ModifierTelephone);
+      fenetre.remove(BoutonRetour_NomPersonne);
+      fenetre.remove(ZoneTexte_ModifierNomPersonne);
+      fenetre.remove(ZoneTexte_ModifierPrenomPersonne);
+      fenetre.remove(ZoneTexte_ModifierTelephonePersonne);
+      fenetre.remove(BoutonModifier_NomPersonne);
+      fenetre.remove(BoutonModifier_PrenomPersonne);
+      fenetre.remove(BoutonModifier_TelephonePersonne);
+      fenetre.remove(BoutonSupprimer_SupprimerPersonne);
+
+
+      fenetre.getContentPane().add(Texte_GererPersonne);
+      fenetre.getContentPane().add(ZoneTexte_NomPersonneGerer);
+      fenetre.getContentPane().add(ZoneTexte_PrenomPersonneGerer);
+      fenetre.getContentPane().add(ZoneTexte_VillePersonneGerer);
+      fenetre.getContentPane().add(ZoneTexte_TelephoneGerer);
+      fenetre.getContentPane().add(BoutonAnnuler_GestionPersonne);
+      fenetre.getContentPane().add(BoutonNom_GererPersonne);
+
+      fenetre.setTitle("Gérer une personne");
+      fenetre.repaint();
+      
+
+      Fond.setIcon(new ImageIcon(img));
+      
+      fenetre.getContentPane().add(Fond);
+     }
+    });
+
+    fenetre.getContentPane().add(Texte_Accueil);
+    fenetre.getContentPane().add(BoutonComp_Accueil);
+    fenetre.getContentPane().add(BoutonEquipe_Accueil);
+    fenetre.getContentPane().add(BoutonPersonne_Accueil);
+    fenetre.setSize(800, 600);
+    fenetre.getContentPane().setLayout(null);
+    fenetre.setVisible(true);
+    fenetre.setResizable(false);
+    fenetre.setLocationRelativeTo(null);
+    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    
+ Fond.setIcon(new ImageIcon(img));
+    
+    fenetre.getContentPane().add(Fond);
+   }
+   
+ });
+
+ }
+}
